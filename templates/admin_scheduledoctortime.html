@@ -1,0 +1,41 @@
+{%include 'admin_header.html'%}
+<style>
+    body {
+        background-color: hsla(0, 0%, 96%, 0.68);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+<center>
+
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>SheduleConsultingTime</h1>
+        <table>
+            <table  class="table" >
+                <tr>
+                    <th>StartTime </th>
+                    <td><input type="time" name="stime" class="form-control"  required ></td>
+                </tr>
+                <tr>
+                    <th>Endtime</th>
+                    <td><input type="time" name="etime" class="form-control"  required ></td>
+                </tr>
+             
+               
+                <tr>
+                    <th>SheduledDate</th>
+                    <td><input type="date" name="date" class="form-control"   required ></td>
+                </tr>
+                <tr>
+                    <th>Amount</th>
+                    <td><input type="text" name="amt" class="form-control"   required ></td>
+                </tr>
+           
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" name="submit" class="btn btn-primary" value="Shedule"></td>
+
+                </tr>
+        </table>

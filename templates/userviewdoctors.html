@@ -1,0 +1,80 @@
+{%include 'user_header.html'%}
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    center {
+        margin-top: 50px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+</style>
+
+<center>
+    <h1>ViewDoctors</h1>
+<table >
+    <tr>
+        <th>Sno</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Place</th>
+        <th>Qualification</th>
+    </tr>
+    {% for row in qry1 %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{row.fname}} {{row.lname}}</td>
+        <td>{{row.phone}}</td>
+        <td>{{row.email}}</td>
+        <td>{{row.place}}</td>
+        <td>{{row.qualification}}</td>
+        <td><a class="btn btn-success" href="/userviewdoctorshedule/{{row.doctor_id}}">ViewShedule</a></td>
+        <td><a class="btn btn-success" href="/user_chat/{{row.login_id}}">Chat</a></td>
+
+
+        <!-- <td><a class="btn btn-danger" href="/admindeletedoctor/{{row.doctor_id}}/{{row.login_id}}">delete</a></td> -->
+        
+    </tr>
+
+    {%endfor%}
+</td>
+</tr>
+</table>
+</center>
+{%include 'footer.html'%}

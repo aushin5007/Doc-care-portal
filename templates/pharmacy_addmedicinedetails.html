@@ -1,0 +1,158 @@
+{% include 'pharmacy_header.html' %}
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    center {
+        margin-top: 30px;
+    }
+
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        margin-right: 5px;
+    }
+
+    /* footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    } */
+</style>
+<div class="container form-container">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <center>
+    <h1>MedicineDetails</h1>
+    {% if r %}
+    <table>
+        <tr>
+            <th>MedicineName</th>
+            <td><input type="text" class="form-control" name="mn"  value="{{r.medicine_name}}"></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td><input type="text" name="des" class="form-control" value="{{r.description}}" ></td>
+        </tr>
+        <tr>
+            <th>Available_qty</th>
+            <td><input type="text" name="aq" class="form-control" value="{{r.available_qty}}" ></td>
+        </tr>
+        <tr>
+            <th>Expiry_date</th>
+            <td><input type="date" name="ed" class="form-control" value="{{r.expiry_date}}" ></td>
+        </tr>
+        <tr>
+            <th>Rate</th>
+            <td><input type="text" name="rt" class="form-control" value="{{r.rate}}" ></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2"><input type="submit" class="btn btn-success" name="sub" value="Update"></td>
+        </tr>
+        
+    </table>
+    {%else%}
+    <table>
+        <tr>
+            <th>MedicineName</th>
+            <td><input type="text" class="form-control" name="mn" ></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td><input type="text" class="form-control" name="des" ></td>
+        </tr>
+        <tr>
+            <th>Available_qty</th>
+            <td><input type="text" class="form-control" name="aq" ></td>
+        </tr>
+        <tr>
+            <th>Expiry_date</th>
+            <td><input type="date" class="form-control" name="ed" ></td>
+        </tr>
+        <tr>
+            <th>Rate</th>
+            <td><input type="text" class="form-control" name="rt" ></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2"><input type="submit" class="btn btn-success" name="sub" value="Add"></td>
+        </tr>
+        
+    </table>
+   
+    </form>
+</div>
+   
+    {%endif%}
+    <div class="container table-container">
+        <h1 class="text-center mb-4">Medicine Details View</h1>
+        <table>
+
+        <tr>
+            <th>Sno</th>
+            <th>MedicineName</th>
+            <th>Description</th>
+            <th>Available_qty</th>
+            <th>Expiry_date</th>
+            <th>Rate</th>
+        </tr>
+        {% for row in qry1 %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{row.medicine_name}}</td>
+            <td>{{row.description}}</td>
+            <td>{{row.available_qty}}</td>
+            <td>{{row.expiry_date}}</td>
+            <td>{{row.rate}}</td>
+            <td><a class="btn btn-success" href="/pharmacyupdatemedicine/{{row.medicine_id}}">update</a></td>
+            <td><a class="btn btn-danger" href="/pharmacydeletemedicine/{{row.medicine_id}}">delete</a></td>
+            
+        </tr>
+
+        {%endfor%}
+    </td>
+</tr>
+</table>
+</div>
+
+</center>
+{%include 'footer.html'%}

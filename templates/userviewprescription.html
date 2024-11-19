@@ -1,0 +1,85 @@
+{%include 'user_header.html'%}
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    center {
+        margin-top: 50px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+</style>
+    <center>
+        <h1>ViewPrescription</h1>
+        <table>
+            <tr>
+                
+                <th>PatientName</th>
+                <th>Username</th>
+                <th>MedicineName</th>
+                <th>Description</th>
+                <th>DateTime</th>
+                
+
+            </tr>
+            {%for i in qry1%}
+            <tr>
+                
+                
+                <td>{{i.booking.patient.patient_fname}} {{i.booking.patient.patient_lname}}</td>
+                <td>{{i.booking.user.user_fname}} {{i.booking.user.user_lname}}</td>
+                <td>{{i.medicine.medicine_name}}</td>
+                <td>{{i.pres_description}}</td>
+                <td>{{i.date_time}}</td>
+                {%if i.pres_status == 'pending'%}
+                <td><a class="btn btn-success" href="/userforwardtopharmacy/{{i.med_pres_id}}">Forward</a></td>
+                {%endif%}
+                {%if i.pres_status == 'accepted'%}
+                <td><a class="btn btn-success" href="/userpayemnttopharmacy/{{i.med_pres_id}}/{{i.p_amount}}">Payment</a></td>
+                {%else%}
+                {%endif%}
+
+
+
+
+
+            </tr>
+            {%endfor%}
+        </table>
+    </center>
+{%include 'footer.html'%}

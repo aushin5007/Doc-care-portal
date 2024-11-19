@@ -1,0 +1,202 @@
+{%include 'user_header.html'%}
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    center {
+        margin-top: 30px;
+    }
+
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        margin-right: 5px;
+    }
+
+    /* footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    } */
+</style>
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <center>
+        <h1>UserAddPatient</h1>
+{%if r%}
+        <table>
+            <tr>
+                <th>First name</th>
+                <td><input type="text" name="fname" value="{{r.patient_fname}}" class="form-control" pattern="[A-Za-z]+$" required ></td>
+            </tr>
+            <tr>
+                <th>last name</th>
+                <td><input type="text" name="lname" class="form-control" value="{{r.patient_lname}}" pattern="[A-Za-z]+$" required ></td>
+            </tr>
+          
+           
+            <tr>
+                <th>phone</th>
+                <td><input type="text" name="phone" class="form-control"  value="{{r.phone}}"   required ></td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td><input type="text" name="plc" class="form-control" value="{{r.place}}" pattern="[A-Za-z]+$"  required ></td>
+            </tr>
+            <tr>
+                <th>email</th>
+                <td><input type="email" name="email" class="form-control" value="{{r.email}}" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" ></td>
+            </tr>
+        
+           
+            <tr>
+                <th>Housename</th>
+                <td><input type="text" name="hname" value="{{r.housename}}" class="form-control" required pattern="[0-9a-zA-Z]{0,30}" ></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td><input type="text" name="gen" value="{{r.gender}}" class="form-control"  required> 
+                </td>
+            </tr>
+            <tr>
+                <th>BloodGroup</th>
+                <td><input type="text" name="bld" value="{{r.blood_group}}" class="form-control" required ></td>
+            </tr>
+            <tr>
+                <th>DOB</th>
+                <td><input type="date" name="dob" class="form-control" value="{{r.dob}}" required ></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="submit" class="btn btn-primary" value="Register"></td>
+        
+            </tr>
+        </table>
+
+
+{%else%}
+
+<table>
+    <tr>
+        <th>First name</th>
+        <td><input type="text" name="fname" class="form-control" pattern="[A-Za-z]+$" required ></td>
+    </tr>
+    <tr>
+        <th>last name</th>
+        <td><input type="text" name="lname" class="form-control" pattern="[A-Za-z]+$" required ></td>
+    </tr>
+  
+   
+    <tr>
+        <th>phone</th>
+        <td><input type="text" name="phone" class="form-control"   required ></td>
+    </tr>
+    <tr>
+        <th>Place</th>
+        <td><input type="text" name="plc" class="form-control" pattern="[A-Za-z]+$"  required ></td>
+    </tr>
+    <tr>
+        <th>email</th>
+        <td><input type="email" name="email" class="form-control" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" ></td>
+    </tr>
+
+   
+    <tr>
+        <th>Housename</th>
+        <td><input type="text" name="hname" class="form-control" required pattern="[0-9a-zA-Z]{0,30}" ></td>
+    </tr>
+    <tr>
+        <th>Gender</th>
+        <td><input type="text" name="gen" class="form-control"  required> 
+        </td>
+    </tr>
+    <tr>
+        <th>BloodGroup</th>
+        <td><input type="text" name="bld" class="form-control" required ></td>
+    </tr>
+    <tr>
+        <th>DOB</th>
+        <td><input type="date" name="dob" class="form-control" required ></td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center"><input type="submit" name="submit" class="btn btn-primary" value="Register"></td>
+
+    </tr>
+</table>
+{%endif%}
+</center>
+</form>
+<center>
+    <h1>ViewPatients</h1>
+    <table>
+        <tr>
+            <th>UserName</th>
+            <th>PatientName</th>
+            <th>PatientPhone</th>
+            <th>PatientEmail</th>
+            <th>PatientBloodGroup</th>
+            
+
+        </tr>
+        {%for i in qry1%}
+        <tr>
+            
+            <td>{{i.user.user_fname}} {{i.user.user_lname}}</td>
+            <td>{{i.patient_fname}} {{i.patient_lname}}</td>
+            <td>{{i.phone}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.blood_group}}</td>
+            <td><a class="btn btn-success" href="/userupdatepatient/{{i.patient_id}}">update</a></td>
+            <td><a class="btn btn-danger" href="/userdeletepatient/{{i.patient_id}}">delete</a></td>
+            <td><a class="btn btn-danger" href="/useradd_physical/{{i.patient_id}}">Physical Condition</a></td>
+
+
+        </tr>
+        {%endfor%}
+    </table>
+</center>
+
+
+</form>
+{%include 'footer.html'%}

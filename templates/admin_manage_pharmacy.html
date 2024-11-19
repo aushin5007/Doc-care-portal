@@ -1,0 +1,99 @@
+{% include 'admin_header.html' %}
+<style>
+    body {
+        background-color: hsla(0, 0%, 96%, 0.68);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+    <center>
+        <div class="container mt-5">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h1 class="text-center mb-4" style="color: black;">Lab</h1>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        {% if r %}
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Lab name</th>
+                                            <td><input type="text" name="pname" class="form-control" pattern="[A-Za-z]+$" required value="{{r.lab_name}}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone</th>
+                                            <td><input type="text" name="phone" pattern="[0-9]{10}" maxlength="10" class="form-control" required value="{{r.lab_phone}}" maxlength="10" 
+                                                ></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td><input type="email" name="email" class="form-control" required value="{{r.lab_email}}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" align="center"><input type="submit" name="update" class="btn btn-primary" value="Register"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="card">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Lab name</th>
+                                            <td><input type="text" name="pname" class="form-control" pattern="[A-Za-z]+$" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone</th>
+                                            <td><input type="text" pattern="[0-9]{10}" maxlength="10" name="phone" class="form-control" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td><input type="email" name="email" class="form-control" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Username</th>
+                                            <td><input type="text" name="uname" class="form-control" required pattern="[0-9a-zA-Z]{0,30}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Password</th>
+                                            <td><input type="Password" name="pwd" class="form-control" required title="Password must have at least one uppercase letter, one lowercase letter, one digit, and be at least 8 characters long."></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" align="center"><input type="submit" name="submit" class="btn btn-primary" value="Register"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </form>
+
+            <table class="table" style="width: 500px;  ">
+                <tr>
+                    <th>Sno</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </tr>
+                {% for row in qry1 %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ row.lab_name }}</td>
+                        <td>{{ row.lab_phone }}</td>
+                        <td>{{ row.lab_email }}</td>
+                        <td>
+                            <a class="btn btn-success btn-sm" href="/adminupdatepharmacy/{{ row.lab_id }}">update</a>
+                            <a class="btn btn-danger btn-sm" href="/admindeletepharmacy/{{ row.lab_id }}/{{ row.login_id }}">delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </center>
+    {% include 'footer.html' %}
+</body>

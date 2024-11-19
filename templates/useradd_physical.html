@@ -1,0 +1,164 @@
+{% include 'user_header.html' %}
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    center {
+        margin-top: 30px;
+    }
+
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        margin-right: 5px;
+    }
+
+   
+</style>
+<div class="container form-container">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <center>
+    <h1>Physical Condition</h1>
+    {% if r %}
+    <table>
+        <tr>
+            <th>Blood Pressure</th>
+            <td><input type="text" class="form-control" name="bl"  value="{{r.blood_pressure}}"></td>
+        </tr>
+        <tr>
+            <th>Sugar</th>
+            <td><input type="text" name="su" class="form-control" value="{{r.sugar}}" ></td>
+        </tr>
+        <tr>
+            <th>cholesterol</th>
+            <td><input type="text" name="ch" class="form-control" value="{{r.cholesterol}}" ></td>
+        </tr>
+        <tr>
+            <th>Height</th>
+            <td><input type="text" name="he" class="form-control" value="{{r.height}}" ></td>
+        </tr>
+        <tr>
+            <th>Weight</th>
+            <td><input type="text" name="we" class="form-control" value="{{r.weight}}" ></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td><input type="text" name="desc" class="form-control" value="{{r.description}}"  ></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2"><input type="submit" class="btn btn-success" name="sub" value="Update"></td>
+        </tr>
+        
+    </table>
+    {%else%}
+    <table>
+        <tr>
+            <th>Blood Pressure</th>
+            <td><input type="text" class="form-control" name="bl" ></td>
+        </tr>
+        <tr>
+            <th>Sugar</th>
+            <td><input type="text" name="su" class="form-control"  ></td>
+        </tr>
+        <tr>
+            <th>cholesterol</th>
+            <td><input type="text" name="ch" class="form-control" ></td>
+        </tr>
+        <tr>
+            <th>Height</th>
+            <td><input type="text" name="he" class="form-control"  ></td>
+        </tr>
+        <tr>
+            <th>Weight</th>
+            <td><input type="text" name="we" class="form-control"  ></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td><textarea type="text" name="desc" class="form-control"  ></textarea></td>
+        </tr>
+        <tr>
+            <th>Report</th>
+            <td><input type="file" name="report" class="form-control"  ></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2"><input type="submit" class="btn btn-success" name="submit" value="Add"></td>
+        </tr>
+        
+    </table>
+    {%endif%}
+
+    </form>
+</div>
+   
+    <div class="container table-container">
+        <h1 class="text-center mb-4">Physical condition</h1>
+        <table>
+
+        <tr>
+            <th>Sno</th>
+            <th>blood_pressure</th>
+            <th>sugar</th>
+            <th>Cholestrol</th>
+            <th>weight</th>
+            <th>height</th>
+            <th>Report</th>
+        </tr>
+        {% for row in qry1 %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{row.blood_pressure}}</td>
+            <td>{{row.sugar}}</td>
+            <td>{{row.cholesterol}}</td>
+            <td>{{row.weight}}</td>
+            <td>{{row.height}}</td>
+            <td><img src="/static/{{row.report}}" width="400px" ></td>
+            <td><a class="btn btn-success" href="/userupdate_physical/{{row.physical_condition_id}}">update</a></td>
+            <td><a class="btn btn-danger" href="/userdelete_physical/{{row.physical_condition_id}}">delete</a></td>
+            
+        </tr>
+
+        {%endfor%}
+    </td>
+</tr>
+</table>
+</div>
+
+</center>
+{%include 'footer.html'%}

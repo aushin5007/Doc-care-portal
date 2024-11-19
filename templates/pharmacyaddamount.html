@@ -1,0 +1,86 @@
+{%include 'pharmacy_header.html'%}
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    center {
+        margin-top: 30px;
+    }
+
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        margin-right: 5px;
+    }
+
+    /* footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    } */
+</style>
+<br><br>
+<h1 align="center">AddAmount</h1>
+<br><br><br>
+<center>
+    <div class="container form-container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <center>
+    <table>
+        <tr>
+            <th>Amount</th>
+            <td><input type="number" class="form-control" name="amt"></td>
+        </tr>
+        <tr>
+            <td align="center" colspan="2"><input class="btn btn-success" type="submit" value="Add"></td>
+        </tr>
+    </table>
+
+</form>
+</div>
+</center>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+{%include 'footer.html'%}

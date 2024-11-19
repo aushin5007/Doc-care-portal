@@ -1,0 +1,76 @@
+{%include 'doctor_header.html'%}
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    center {
+        margin-top: 50px;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+</style>
+<body>
+    <center>
+        <h1>ViewShedule</h1>
+        <table>
+            <tr>
+                <th>DoctorName</th>
+                <th>StartTime</th>
+                <th>Endtime</th>
+                <th>SheduleDate</th>
+                <th>Amount</th>
+                
+                
+
+            </tr>
+            {%for i in qry1%}
+            <tr>
+                
+                <td>{{i.doctor.fname}} {{i.doctor.lname}}</td>
+                <td>{{i.start_time}}</td>
+                <td>{{i.end_time}}</td>
+                <td>{{i.schedule_date}}</td>
+                <td>{{i.fee_amount}}</td>
+                <td><a class="btn btn-success" href="/doctorview_booking/{{i.schedule_id}}">Bookings</a></td>
+                
+
+            </tr>
+            {%endfor%}
+        </table>
+    </center>
+    {%include 'footer.html'%}
